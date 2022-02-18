@@ -8,7 +8,10 @@ const {
 fetchMyIp()
   .then(fetchCoordsByIp)
   .then(fetchISSFlyOverTimes)
-  .then(nextISSTimesForMyLocation);
+  .then(nextISSTimesForMyLocation)
+  .catch((error) => {
+    console.log("It didn't work: ", error.message);
+  })
 
 const printPassTimes = function (passTimes) {
   for (const pass of passTimes) {
@@ -19,6 +22,8 @@ const printPassTimes = function (passTimes) {
   }
 };
 
-nextISSTimesForMyLocation().then((passTimes) => {
-  printPassTimes(passTimes);
-});
+nextISSTimesForMyLocation()
+.then((passTimes) => { printPassTimes(passTimes) })
+.catch((error) => {
+  console.log("It didn't work: ", error.message);
+})
